@@ -1,71 +1,95 @@
 package tetris;
 
-import tetris.blocks.*;
-import tetris.utils.*;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import tetris.blocks.BigBlock;
+import tetris.blocks.MiniBlock;
+import tetris.utils.Time;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
+import static org.lwjgl.opengl.GL11.GL_PROJECTION;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glColor3f;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
+import static org.lwjgl.opengl.GL11.glMatrixMode;
+import static org.lwjgl.opengl.GL11.glOrtho;
+import static org.lwjgl.opengl.GL11.glRecti;
 
 /**
  * Created by AEnterprise
  */
-public class Tetris extends JFrame implements ActionListener {
-	private Timer timer;
+public class Tetris {
+	public final int WIDTH = 1200, HEIGHT = 900;
+	private static List<MiniBlock> blocks = new ArrayList<MiniBlock>();
+	private int time = 0;
+	private BigBlock bigblock;
+	//field size: 17x27
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new Tetris();
-			}
-		});
+		new Tetris();
 	}
 
 	public Tetris() {
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		pack();
-		setVisible(true);
-		setSize(1200, 900);
-		setTitle("Tetris");
-		setResizable(false);
-		setLocationRelativeTo(null);
-		timer = new Timer(200, this);
-		timer.setRepeats(true);
-		timer.start();
-		setBackground(Color.lightGray);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		repaint();
-	}
-
-	@Override
-	public void paint(Graphics g) {
-		drawBackground(g);
-		MiniBlock block = new MiniBlock(new Location(10, 10));
-		block.render(g);
-		drawGrid(g);
-	}
-
-	private void drawBackground(Graphics g) {
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(0, 0, 1200, 900);
-
-		g.setColor(new Color(0, 0, 0));
-		g.fillRect(50, 75, 600, 750);
-
-	}
-
-	private void drawGrid(Graphics g) {
-		g.setColor(Color.RED);
-		for (int t = 0; t < 25; t++) {
-			g.drawLine(50 + t * 25, 75, 50 + t * 25, 825);
+		initGL();
+		blocks.add(new MiniBlock(0, 0));
+		blocks.add(new MiniBlock(0, 27));
+		blocks.add(new MiniBlock(17, 27));
+		blocks.add(new MiniBlock(17, 0));
+		while (!Display.isCloseRequested()) {
+			render();
+			Display.update();
+			Display.sync(40);
+			Display.setResizable(false);
 		}
 
-		for (int t = 0; t < 30; t++) {
-			g.drawLine(50, 75 + 25 * t, 650, 75 + 25 * t);
+		Display.destroy();
+		System.exit(0);
+	}
+
+	private void initGL() {
+		try {
+			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
+			Display.setTitle("Tetris");
+			Display.create();
+		} catch (LWJGLException e) {
+			e.printStackTrace();
+			Display.destroy();
+			System.exit(1);
 		}
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
+		glMatrixMode(GL_MODELVIEW);
+	}
+
+	private void tick() {
+		if (!Time.shouldTick())
+			return;
+		bigblock.tick();
+	}
+
+	private void render() {
+		glClear(GL_COLOR_BUFFER_BIT);
+		glColor3f(0.91f, 0.91f, 0.91f);
+		glRecti(0, 0, WIDTH, HEIGHT);
+		glColor3f(0, 0, 0);
+		glRecti(300, 100, 750, 800);
+		for (MiniBlock block : blocks) {
+			block.render();
+		}
+	}
+
+	public static boolean isBlockAt(int x, int y) {
+		for (MiniBlock block : blocks) {
+			if (block.x == x && block.y == y)
+				return true;
+		}
+		return false;
 	}
 }
