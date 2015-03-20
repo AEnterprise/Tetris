@@ -4,48 +4,35 @@ package tetris;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import tetris.blocks.BigBlock;
-import tetris.blocks.MiniBlock;
-import tetris.utils.Time;
+import org.lwjgl.opengl.GL11;
+import tetris.screens.ScreenBase;
+import tetris.screens.ScreenMain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
-import static org.lwjgl.opengl.GL11.GL_PROJECTION;
-import static org.lwjgl.opengl.GL11.glClear;
-import static org.lwjgl.opengl.GL11.glColor3f;
-import static org.lwjgl.opengl.GL11.glLoadIdentity;
-import static org.lwjgl.opengl.GL11.glMatrixMode;
-import static org.lwjgl.opengl.GL11.glOrtho;
-import static org.lwjgl.opengl.GL11.glRecti;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by AEnterprise
  */
-public class Tetris {
-	public final int WIDTH = 1200, HEIGHT = 900;
-	private static List<MiniBlock> blocks = new ArrayList<MiniBlock>();
-	private int time = 0;
-	private BigBlock bigblock;
-	//field size: 17x27
+public class Tetris implements ActionListener {
+	public static final int WIDTH = 1200, HEIGHT = 900;
+	private static ScreenBase currentScreen;
+
 
 	public static void main(String[] args) {
 		new Tetris();
 	}
 
-	public Tetris() {
+	private Tetris() {
 		initGL();
-		blocks.add(new MiniBlock(0, 0));
-		blocks.add(new MiniBlock(0, 27));
-		blocks.add(new MiniBlock(17, 27));
-		blocks.add(new MiniBlock(17, 0));
+		new Timer(20, this);
+		switchToScreen(new ScreenMain());
+		Display.setResizable(false);
 		while (!Display.isCloseRequested()) {
-			render();
+			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+			currentScreen.render();
 			Display.update();
-			Display.sync(40);
-			Display.setResizable(false);
 		}
 
 		Display.destroy();
@@ -62,34 +49,33 @@ public class Tetris {
 			Display.destroy();
 			System.exit(1);
 		}
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
-		glMatrixMode(GL_MODELVIEW);
+
+		GL11.glShadeModel(GL11.GL_SMOOTH);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		GL11.glDisable(GL11.GL_LIGHTING);
+
+		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		GL11.glClearDepth(1);
+
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+		GL11.glViewport(0, 0, WIDTH, HEIGHT);
+		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+
+		GL11.glMatrixMode(GL11.GL_PROJECTION);
+		GL11.glLoadIdentity();
+		GL11.glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
+		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
 
-	private void tick() {
-		if (!Time.shouldTick())
-			return;
-		bigblock.tick();
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		currentScreen.tick();
 	}
 
-	private void render() {
-		glClear(GL_COLOR_BUFFER_BIT);
-		glColor3f(0.91f, 0.91f, 0.91f);
-		glRecti(0, 0, WIDTH, HEIGHT);
-		glColor3f(0, 0, 0);
-		glRecti(300, 100, 750, 800);
-		for (MiniBlock block : blocks) {
-			block.render();
-		}
-	}
-
-	public static boolean isBlockAt(int x, int y) {
-		for (MiniBlock block : blocks) {
-			if (block.x == x && block.y == y)
-				return true;
-		}
-		return false;
+	public static void switchToScreen(ScreenBase screen) {
+		currentScreen = screen;
+		screen.init();
 	}
 }
