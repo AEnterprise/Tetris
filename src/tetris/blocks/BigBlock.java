@@ -8,7 +8,7 @@ import java.util.List;
  */
 public abstract class BigBlock {
 	private int x, y;
-	private List<MiniBlock> blocks = new ArrayList<MiniBlock>();
+	private List<Block> blocks = new ArrayList<Block>();
 
 	public void tick() {
 

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by AEnterprise
  */
 public abstract class ScreenBase {
-	private Font awtFont = new Font("", Font.PLAIN, 12);
+	private Font awtFont = new Font("", Font.PLAIN, 18);
 	private TrueTypeFont font;
 	protected ArrayList<WidgetBase> widgets = new ArrayList<WidgetBase>();
 
@@ -22,17 +22,31 @@ public abstract class ScreenBase {
 	public abstract void init();
 
 	public void render() {
+		renderBackground();
+		renderForeground();
+		while (Mouse.next()) {
+			if (Mouse.getEventButton() > -1) {
+				if (!Mouse.getEventButtonState())
+					click(Mouse.getEventX(), (Mouse.getY() - Tetris.HEIGHT) * -1);
+			}
+		}
+	}
+
+	protected void renderBackground() {
 		GL11.glColor3f(0.91f, 0.91f, 0.91f);
 		GL11.glRecti(0, 0, Tetris.WIDTH, Tetris.HEIGHT);
-		boolean mouseDown = false;
+	}
+
+	protected void renderForeground() {
 		for (WidgetBase widget : widgets) {
 			widget.render(Mouse.getX(), (Mouse.getY() - Tetris.HEIGHT) * -1, widget.mouseOver(Mouse.getX(), (Mouse.getY() - Tetris.HEIGHT) * -1));
 		}
-		while (Mouse.next()) {
-			if (Mouse.getEventButton() > -1) {
-				if (Mouse.getEventButtonState()) {
-					System.out.println("PRESSED MOUSE BUTTON: " + Mouse.getEventButton());
-				} else System.out.println("RELEASED MOUSE BUTTON: " + Mouse.getEventButton());
+	}
+
+	private void click(int mouseX, int mouseY) {
+		for (WidgetBase widget : widgets) {
+			if (widget.mouseOver(mouseX, mouseY)) {
+				widget.clicked();
 			}
 		}
 	}

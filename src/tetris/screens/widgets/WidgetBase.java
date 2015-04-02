@@ -26,4 +26,7 @@ public abstract class WidgetBase {
 		Rectangle rect = new Rectangle(x, y, width, height);
 		return rect.contains(mouseX, mouseY);
 	}
+
+	public void clicked() {
+	}
 }

@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
  * Created by AEnterprise
  */
 public class Tetris implements ActionListener {
-	public static final int WIDTH = 1200, HEIGHT = 900;
+	public static final int WIDTH = 1000, HEIGHT = 750;
 	private static ScreenBase currentScreen;
 
 
@@ -26,13 +26,14 @@ public class Tetris implements ActionListener {
 
 	private Tetris() {
 		initGL();
-		new Timer(20, this);
+		new Timer(20, this).start();
 		switchToScreen(new ScreenMain());
 		Display.setResizable(false);
 		while (!Display.isCloseRequested()) {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 			currentScreen.render();
 			Display.update();
+			Display.sync(60);
 		}
 
 		Display.destroy();

@@ -2,7 +2,9 @@ package tetris.screens.widgets;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
+import tetris.Tetris;
 import tetris.screens.ScreenBase;
+import tetris.screens.ScreenGame;
 
 import java.awt.*;
 
@@ -37,5 +39,10 @@ public class WidgetMenuButton extends WidgetBase {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	@Override
+	public void clicked() {
+		Tetris.switchToScreen(new ScreenGame());
 	}
 }

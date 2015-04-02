@@ -12,14 +12,14 @@ public class ScreenMain extends ScreenBase {
 
 	@Override
 	public void init() {
-		widgets.add(new WidgetMenuButton(0, 500, 180, 250, 30, "START", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
+		widgets.add(new WidgetMenuButton(0, 400, 180, 250, 30, "START", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
 	}
 
 	@Override
-	public void render() {
-		super.render();
+	public void renderForeground() {
+		super.renderForeground();
 		setFont(Font.BOLD, 30);
-		drawText("Main menu", 530, 100, Color.cyan);
+		drawText("Main menu", 430, 100, Color.cyan);
 		reset();
 	}
 
