@@ -1,7 +1,12 @@
 package tetris.screens;
 
 import org.newdawn.slick.Color;
-import tetris.blocks.Block;
+import tetris.blocks.BigBlock;
+import tetris.blocks.BigBlockA;
+import tetris.screens.widgets.WidgetButtonLeft;
+import tetris.screens.widgets.WidgetButtonRight;
+import tetris.screens.widgets.WidgetDownButton;
+import tetris.utils.BlockManager;
 
 import static org.lwjgl.opengl.GL11.glColor3f;
 import static org.lwjgl.opengl.GL11.glRecti;
@@ -11,14 +16,18 @@ import static org.lwjgl.opengl.GL11.glRecti;
  */
 public class ScreenGame extends ScreenBase {
 	private int score, level;
-	private Block blocks[][] = new Block[10][20];
+	public static BlockManager blockManager;
+	public static BigBlock bigBlock;
 
 	@Override
 	public void init() {
 		score = 0;
 		level = 1;
-		blocks[0][0] = new Block(9, 19);
-		blocks[0][1] = new Block(8, 19);
+		blockManager = new BlockManager();
+		bigBlock = new BigBlockA(0, 0);
+		widgets.add(new WidgetDownButton(0, 10, 180, 80, 30, "DOWN", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
+		widgets.add(new WidgetButtonLeft(0, 10, 220, 80, 30, "LEFT", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
+		widgets.add(new WidgetButtonRight(0, 10, 260, 80, 30, "RIGHT", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
 	}
 
 	@Override
@@ -36,17 +45,11 @@ public class ScreenGame extends ScreenBase {
 		drawText("Level: " + level, 100, 110, Color.orange);
 		drawText("Score: " + score, 100, 130, Color.orange);
 
-		for (Block blocklist[] : blocks) {
-			for (Block block : blocklist) {
-				if (block == null)
-					continue;
-				block.render();
-			}
-		}
+		blockManager.renderBlocks();
 	}
 
 	@Override
 	public void tick() {
-		reset();
+
 	}
 }

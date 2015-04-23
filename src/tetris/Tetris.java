@@ -33,7 +33,7 @@ public class Tetris implements ActionListener {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 			currentScreen.render();
 			Display.update();
-			Display.sync(60);
+			//Display.sync(60);
 		}
 
 		Display.destroy();
