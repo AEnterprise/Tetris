@@ -6,7 +6,7 @@ import tetris.screens.ScreenGame;
  * Created by AEnterprise
  */
 public abstract class BigBlock {
-	protected int x, y, rotation;
+	public int x, y, rotation;
 
 	public BigBlock(int x, int y) {
 		this.x = x;
@@ -17,27 +17,26 @@ public abstract class BigBlock {
 
 	public void moveDown() {
 		if (canMoveDown()) {
-			removeBlocks();
 			y++;
-			addBlocks();
 		}
+		addBlocks();
 	}
 
 	public void moveLeft() {
 		if (canMoveLeft()) {
-			removeBlocks();
 			x--;
-			addBlocks();
 		}
+		addBlocks();
 	}
 
 	public void moveRight() {
 		if (canMoveRight()) {
-			removeBlocks();
 			x++;
-			addBlocks();
 		}
+		addBlocks();
 	}
+
+	public abstract void rotate();
 
 	public abstract void removeBlocks();
 
@@ -48,6 +47,8 @@ public abstract class BigBlock {
 	public abstract boolean canMoveLeft();
 
 	public abstract boolean canMoveRight();
+
+	public abstract boolean canRotate();
 
 	protected boolean isEmpty(int x, int y) {
 		return ScreenGame.blockManager.isEmpty(x, y);

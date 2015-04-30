@@ -1,21 +1,21 @@
 package tetris.screens;
 
-import org.newdawn.slick.Color;
 import tetris.blocks.BigBlock;
 import tetris.blocks.BigBlockA;
 import tetris.screens.widgets.WidgetButtonLeft;
 import tetris.screens.widgets.WidgetButtonRight;
+import tetris.screens.widgets.WidgetButtonRotate;
 import tetris.screens.widgets.WidgetDownButton;
 import tetris.utils.BlockManager;
 
-import static org.lwjgl.opengl.GL11.glColor3f;
-import static org.lwjgl.opengl.GL11.glRecti;
+import java.awt.*;
+
 
 /**
  * Created by AEnterprise
  */
 public class ScreenGame extends ScreenBase {
-	private int score, level;
+	private int score, level, delay, lvlDelay;
 	public static BlockManager blockManager;
 	public static BigBlock bigBlock;
 
@@ -24,32 +24,65 @@ public class ScreenGame extends ScreenBase {
 		score = 0;
 		level = 1;
 		blockManager = new BlockManager();
-		bigBlock = new BigBlockA(0, 0);
+		newBlock();
 		widgets.add(new WidgetDownButton(0, 10, 180, 80, 30, "DOWN", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
 		widgets.add(new WidgetButtonLeft(0, 10, 220, 80, 30, "LEFT", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
 		widgets.add(new WidgetButtonRight(0, 10, 260, 80, 30, "RIGHT", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
+		widgets.add(new WidgetButtonRotate(0, 10, 300, 80, 30, "ROTATE", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
+		lvlDelay = delay = 40;
 	}
 
 	@Override
-	public void renderBackground() {
-		super.renderBackground();
-		glColor3f(1, 1, 1);
-		glRecti(300, 100, 600, 700);
-		glColor3f(0, 0, 0);
+	public void renderBackground(Graphics g, int mouseX, int mouseY) {
+		super.renderBackground(g, mouseX, mouseY);
+		g.setColor(Color.ORANGE);
+		g.fillRect(300, 100, 300, 600);
 	}
 
 	@Override
-	protected void renderForeground() {
-		super.renderForeground();
+	protected void renderForeground(Graphics g, int mouseX, int mouseY) {
+		super.renderForeground(g, mouseX, mouseY);
+		g.setColor(Color.BLUE);
+		String lvl = "Level: " + level;
+		g.drawChars(lvl.toCharArray(), 0, lvl.length(), 10, 100);
+		String s = "Score: " + score;
+		g.drawChars(s.toCharArray(), 0, s.length(), 10, 120);
 
-		drawText("Level: " + level, 100, 110, Color.orange);
-		drawText("Score: " + score, 100, 130, Color.orange);
-
-		blockManager.renderBlocks();
+		blockManager.renderBlocks(g);
 	}
 
 	@Override
 	public void tick() {
+		delay--;
+		if (delay == 0) {
+			delay = lvlDelay;
+			int y = bigBlock.y;
+			bigBlock.moveDown();
+			if (y == bigBlock.y)
+				newBlock();
+		}
+	}
 
+	private void newBlock() {
+		checkLines();
+		bigBlock = new BigBlockA(0, 0);
+	}
+
+	private void checkLines() {
+		int olcScore = score;
+		for (int y = 0; y < 20; y++) {
+			boolean full = true;
+			for (int x = 0; x < 10; x++) {
+				if (blockManager.isEmpty(x, y)) {
+					full = false;
+				}
+			}
+			if (full) {
+				blockManager.removeLine(y);
+				score += 10;
+			}
+		}
+		if (olcScore != score)
+			checkLines();
 	}
 }

@@ -1,6 +1,5 @@
 package tetris.screens;
 
-import org.newdawn.slick.Color;
 import tetris.screens.widgets.WidgetMenuButton;
 
 import java.awt.*;
@@ -16,10 +15,9 @@ public class ScreenMain extends ScreenBase {
 	}
 
 	@Override
-	public void renderForeground() {
-		super.renderForeground();
-		setFont(Font.BOLD, 30);
-		drawText("Main menu", 430, 100, Color.cyan);
+	public void renderForeground(Graphics g, int mouseX, int mouseY) {
+		super.renderForeground(g, mouseX, mouseY);
+
 		reset();
 	}
 

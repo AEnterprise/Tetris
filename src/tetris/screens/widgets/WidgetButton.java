@@ -1,7 +1,5 @@
 package tetris.screens.widgets;
 
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 import tetris.screens.ScreenBase;
 
 import java.awt.*;
@@ -20,11 +18,11 @@ public abstract class WidgetButton extends WidgetBase {
 	}
 
 	@Override
-	public void render(int mouseX, int mouseY, boolean hover) {
-		GL11.glColor3f(hover ? backgroundHover.getRed() : backgroundNormal.getRed(), hover ? backgroundHover.getGreen() : backgroundNormal.getGreen(), hover ? backgroundHover.getBlue() : backgroundNormal.getBlue());
-		GL11.glRecti(x, y, x + width, y + height);
-		screen.setFont(Font.BOLD, 15);
-		screen.drawText(text, x + width / 2 - (text.length() / 2) * 15, y + height / 4, hover ? textHover : textNormal);
+	public void render(Graphics g, int mouseX, int mouseY, boolean hover) {
+		g.setColor(hover ? backgroundHover : backgroundNormal);
+		g.fillRect(x, y, width, height);
+		g.setColor(hover ? textHover : textNormal);
+		g.drawChars(text.toCharArray(), 0, text.length(), (x + width / 2) - text.length() * 4, y + height / 2);
 	}
 
 	public WidgetButton setColors(Color backgroundNormal, Color backgroundHover, Color textNormal, Color textHover) {

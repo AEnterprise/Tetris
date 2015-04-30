@@ -20,7 +20,7 @@ public abstract class WidgetBase {
 		this.screen = screen;
 	}
 
-	public abstract void render(int mouseX, int mouseY, boolean hover);
+	public abstract void render(Graphics g, int mouseX, int mouseY, boolean hover);
 
 	public boolean mouseOver(int mouseX, int mouseY) {
 		Rectangle rect = new Rectangle(x, y, width, height);

@@ -1,82 +1,63 @@
 package tetris;
 
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
 import tetris.screens.ScreenBase;
 import tetris.screens.ScreenMain;
+import tetris.utils.MouseListener;
 
 import javax.swing.*;
+import java.applet.Applet;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 /**
  * Created by AEnterprise
  */
-public class Tetris implements ActionListener {
+public class Tetris extends Applet implements ActionListener {
 	public static final int WIDTH = 1000, HEIGHT = 750;
 	private static ScreenBase currentScreen;
+	private int counter = 7;
 
 
-	public static void main(String[] args) {
-		new Tetris();
-	}
-
-	private Tetris() {
-		initGL();
+	@Override
+	public void init() {
+		super.init();
+		setSize(WIDTH, HEIGHT);
 		new Timer(20, this).start();
 		switchToScreen(new ScreenMain());
-		Display.setResizable(false);
-		while (!Display.isCloseRequested()) {
-			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-			currentScreen.render();
-			Display.update();
-			//Display.sync(60);
-		}
-
-		Display.destroy();
-		System.exit(0);
+		addMouseListener(new MouseListener());
+		addMouseMotionListener(new MouseListener());
 	}
 
-	private void initGL() {
-		try {
-			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
-			Display.setTitle("Tetris");
-			Display.create();
-		} catch (LWJGLException e) {
-			e.printStackTrace();
-			Display.destroy();
-			System.exit(1);
-		}
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		setSize(WIDTH, HEIGHT);
+		currentScreen.render(g, MouseListener.mouseX, MouseListener.mouseY);
 
-		GL11.glShadeModel(GL11.GL_SMOOTH);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glDisable(GL11.GL_LIGHTING);
+	}
 
-		GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		GL11.glClearDepth(1);
-
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-
-		GL11.glViewport(0, 0, WIDTH, HEIGHT);
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
-
-		GL11.glMatrixMode(GL11.GL_PROJECTION);
-		GL11.glLoadIdentity();
-		GL11.glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+	@Override
+	public boolean action(Event evt, Object what) {
+		return super.action(evt, what);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		currentScreen.tick();
+		counter--;
+		if (counter == 0) {
+			this.repaint();
+			counter = 7;
+		}
 	}
 
 	public static void switchToScreen(ScreenBase screen) {
 		currentScreen = screen;
 		screen.init();
+	}
+
+	public static void click(int x, int y) {
+		currentScreen.click(x, y);
 	}
 }
