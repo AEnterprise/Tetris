@@ -5,13 +5,12 @@ import java.awt.Graphics;
 
 import tetris.Tetris;
 import tetris.blocks.BigBlock;
-import tetris.blocks.BigBlockA;
 import tetris.screens.widgets.WidgetButtonLeft;
 import tetris.screens.widgets.WidgetButtonRight;
 import tetris.screens.widgets.WidgetButtonRotate;
 import tetris.screens.widgets.WidgetDownButton;
 import tetris.utils.BlockManager;
-
+import tetris.utils.Utils;
 
 /**
  * Created by AEnterprise
@@ -67,7 +66,7 @@ public class ScreenGame extends ScreenBase {
 
 	private void newBlock() {
 		checkLines();
-		bigBlock = new BigBlockA(0, 0);
+		bigBlock = Utils.getRandomBlock(0, 0);
 	}
 
 	private void checkLines() {
