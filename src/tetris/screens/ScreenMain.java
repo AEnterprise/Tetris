@@ -1,8 +1,9 @@
 package tetris.screens;
 
-import tetris.screens.widgets.WidgetMenuButton;
+import java.awt.Color;
+import java.awt.Graphics;
 
-import java.awt.*;
+import tetris.screens.widgets.WidgetMenuButton;
 
 /**
  * Created by AEnterprise
@@ -17,7 +18,6 @@ public class ScreenMain extends ScreenBase {
 	@Override
 	public void renderForeground(Graphics g, int mouseX, int mouseY) {
 		super.renderForeground(g, mouseX, mouseY);
-
 		reset();
 	}
 

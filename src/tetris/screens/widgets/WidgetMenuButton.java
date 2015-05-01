@@ -15,6 +15,6 @@ public class WidgetMenuButton extends WidgetButton {
 
 	@Override
 	public void clicked() {
-		Tetris.switchToScreen(new ScreenGame());
+		Tetris.INSTANCE.switchToScreen(new ScreenGame());
 	}
 }

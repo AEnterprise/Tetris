@@ -1,9 +1,9 @@
 package tetris.utils;
 
-import tetris.Tetris;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+
+import tetris.Tetris;
 
 /**
  * Created by AEnterprise
@@ -34,7 +34,7 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		Tetris.click(e.getX(), e.getY());
+		Tetris.INSTANCE.click(e.getX(), e.getY());
 	}
 
 	@Override

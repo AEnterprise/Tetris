@@ -1,5 +1,9 @@
 package tetris.screens;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
+import tetris.Tetris;
 import tetris.blocks.BigBlock;
 import tetris.blocks.BigBlockA;
 import tetris.screens.widgets.WidgetButtonLeft;
@@ -8,16 +12,14 @@ import tetris.screens.widgets.WidgetButtonRotate;
 import tetris.screens.widgets.WidgetDownButton;
 import tetris.utils.BlockManager;
 
-import java.awt.*;
-
 
 /**
  * Created by AEnterprise
  */
 public class ScreenGame extends ScreenBase {
-	private int score, level, delay, lvlDelay;
 	public static BlockManager blockManager;
 	public static BigBlock bigBlock;
+	private int score, level, delay, lvlDelay;
 
 	@Override
 	public void init() {
@@ -82,7 +84,9 @@ public class ScreenGame extends ScreenBase {
 				score += 10;
 			}
 		}
-		if (olcScore != score)
+		if (olcScore != score) {
+			Tetris.INSTANCE.repaint();
 			checkLines();
+		}
 	}
 }
