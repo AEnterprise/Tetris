@@ -1,6 +1,7 @@
 package tetris.blocks;
 
 import tetris.screens.ScreenGame;
+import tetris.utils.Colors;
 
 /**
  * Created by AEnterprise
@@ -8,7 +9,7 @@ import tetris.screens.ScreenGame;
 public class BigBlockA extends BigBlock {
 
 	public BigBlockA(int x, int y) {
-		super(x, y);
+		super(x, y, Colors.getRandomColor());
 	}
 
 	@Override
@@ -35,17 +36,17 @@ public class BigBlockA extends BigBlock {
 		switch (rotation) {
 			case 0:
 			case 2:
-				ScreenGame.blockManager.setBlock(x, y, new Block());
-				ScreenGame.blockManager.setBlock(x + 1, y, new Block());
-				ScreenGame.blockManager.setBlock(x + 2, y, new Block());
-				ScreenGame.blockManager.setBlock(x + 3, y, new Block());
+				ScreenGame.blockManager.setBlock(x, y, new Block(color));
+				ScreenGame.blockManager.setBlock(x + 1, y, new Block(color));
+				ScreenGame.blockManager.setBlock(x + 2, y, new Block(color));
+				ScreenGame.blockManager.setBlock(x + 3, y, new Block(color));
 				return;
 			case 1:
 			case 3:
-				ScreenGame.blockManager.setBlock(x, y, new Block());
-				ScreenGame.blockManager.setBlock(x, y + 1, new Block());
-				ScreenGame.blockManager.setBlock(x, y + 2, new Block());
-				ScreenGame.blockManager.setBlock(x, y + 3, new Block());
+				ScreenGame.blockManager.setBlock(x, y, new Block(color));
+				ScreenGame.blockManager.setBlock(x, y + 1, new Block(color));
+				ScreenGame.blockManager.setBlock(x, y + 2, new Block(color));
+				ScreenGame.blockManager.setBlock(x, y + 3, new Block(color));
 		}
 	}
 

@@ -1,5 +1,7 @@
 package tetris.blocks;
 
+import java.awt.Color;
+
 import tetris.screens.ScreenGame;
 
 /**
@@ -7,11 +9,13 @@ import tetris.screens.ScreenGame;
  */
 public abstract class BigBlock {
 	public int x, y, rotation;
+	protected Color color;
 
-	public BigBlock(int x, int y) {
+	public BigBlock(int x, int y, Color color) {
 		this.x = x;
 		this.y = y;
 		rotation = 0;
+		this.color = color;
 		addBlocks();
 	}
 
