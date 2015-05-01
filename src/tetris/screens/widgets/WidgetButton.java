@@ -1,8 +1,9 @@
 package tetris.screens.widgets;
 
-import tetris.screens.ScreenBase;
+import java.awt.Color;
+import java.awt.Graphics;
 
-import java.awt.*;
+import tetris.screens.ScreenBase;
 
 /**
  * Created by AEnterprise
@@ -11,9 +12,8 @@ public abstract class WidgetButton extends WidgetBase {
 	private String text;
 	private Color backgroundNormal, backgroundHover, textNormal, textHover;
 
-
-	public WidgetButton(int id, int x, int y, int width, int height, String text, ScreenBase screen) {
-		super(id, x, y, width, height, screen);
+	public WidgetButton(int x, int y, int width, int height, String text, ScreenBase screen) {
+		super(x, y, width, height, screen);
 		this.text = text;
 	}
 

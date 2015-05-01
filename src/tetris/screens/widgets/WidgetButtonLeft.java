@@ -1,6 +1,5 @@
 package tetris.screens.widgets;
 
-import tetris.Tetris;
 import tetris.screens.ScreenBase;
 import tetris.screens.ScreenGame;
 
@@ -9,12 +8,12 @@ import tetris.screens.ScreenGame;
  */
 public class WidgetButtonLeft extends WidgetButton {
 
-	public WidgetButtonLeft(int id, int x, int y, int width, int height, String text, ScreenBase screen) {
-		super(id, x, y, width, height, text, screen);
+	public WidgetButtonLeft(int x, int y, int width, int height, String text, ScreenBase screen) {
+		super(x, y, width, height, text, screen);
 	}
 
 	@Override
 	public void clicked() {
-		((ScreenGame) Tetris.INSTANCE.getCurrentScreen()).bigBlock.moveLeft();
+		((ScreenGame) screen).bigBlock.moveLeft();
 	}
 }

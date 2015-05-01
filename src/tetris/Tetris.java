@@ -25,6 +25,8 @@ public class Tetris extends Applet implements ActionListener {
 	@Override
 	public void init() {
 		super.init();
+		this.setName("TETRIS");
+		this.
 		setSize(WIDTH, HEIGHT);
 		switchToScreen(new ScreenMain());
 		addMouseListener(new MouseListener());

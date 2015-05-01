@@ -2,19 +2,20 @@ package tetris.screens.widgets;
 
 import tetris.Tetris;
 import tetris.screens.ScreenBase;
-import tetris.screens.ScreenGame;
 
 /**
  * Created by AEnterprise
  */
 public class WidgetMenuButton extends WidgetButton {
+	private final ScreenBase newScreen;
 
-	public WidgetMenuButton(int id, int x, int y, int width, int height, String text, ScreenBase screen) {
-		super(id, x, y, width, height, text, screen);
+	public WidgetMenuButton(int x, int y, int width, int height, String text, ScreenBase newScreen, ScreenBase screen) {
+		super(x, y, width, height, text, screen);
+		this.newScreen = newScreen;
 	}
 
 	@Override
 	public void clicked() {
-		Tetris.INSTANCE.switchToScreen(new ScreenGame());
+		Tetris.INSTANCE.switchToScreen(newScreen);
 	}
 }

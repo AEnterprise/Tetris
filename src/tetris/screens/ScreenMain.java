@@ -13,7 +13,8 @@ public class ScreenMain extends ScreenBase {
 
 	@Override
 	public void init() {
-		widgets.add(new WidgetMenuButton(0, 400, 180, 250, 30, "START", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
+		widgets.add(new WidgetMenuButton(400, 180, 250, 30, "START", new ScreenGame(), this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
+		widgets.add(new WidgetMenuButton(400, 230, 250, 30, "CREDITS", new ScreenCredits(), this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
 	}
 
 	@Override
@@ -25,7 +26,6 @@ public class ScreenMain extends ScreenBase {
 		String title = "TETRIS";
 		g.drawChars(title.toCharArray(), 0, title.length(), 470, 60);
 		g.setFont(old);
-		reset();
 	}
 
 	@Override
