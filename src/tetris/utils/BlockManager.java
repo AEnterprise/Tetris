@@ -1,8 +1,8 @@
 package tetris.utils;
 
-import tetris.blocks.Block;
+import java.awt.Graphics;
 
-import java.awt.*;
+import tetris.blocks.Block;
 
 
 /**

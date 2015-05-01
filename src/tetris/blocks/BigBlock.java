@@ -50,10 +50,9 @@ public abstract class BigBlock {
 		rotateRight();
 		resetList();
 		for (Location location : locations) {
-			if (!ScreenGame.blockManager.isEmpty(x + location.getY(), x + location.getY())) {
+			if (!ScreenGame.blockManager.isEmpty(x + location.getX(), y + location.getY())) {
 				rotateLeft();
 				resetList();
-				return;
 			}
 		}
 		addBlocks();

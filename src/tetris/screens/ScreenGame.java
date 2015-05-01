@@ -18,7 +18,7 @@ import tetris.utils.BlockManager;
  */
 public class ScreenGame extends ScreenBase {
 	public static BlockManager blockManager;
-	public static BigBlock bigBlock;
+	public BigBlock bigBlock;
 	private int score, level, delay, lvlDelay;
 
 	@Override
@@ -84,7 +84,7 @@ public class ScreenGame extends ScreenBase {
 				score += 10;
 			}
 		}
-		if (olcScore != score) {
+		if (score > 0 && olcScore != score) {
 			Tetris.INSTANCE.repaint();
 			checkLines();
 		}

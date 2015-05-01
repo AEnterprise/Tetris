@@ -1,5 +1,6 @@
 package tetris.screens.widgets;
 
+import tetris.Tetris;
 import tetris.screens.ScreenBase;
 import tetris.screens.ScreenGame;
 
@@ -14,6 +15,6 @@ public class WidgetButtonLeft extends WidgetButton {
 
 	@Override
 	public void clicked() {
-		ScreenGame.bigBlock.moveLeft();
+		((ScreenGame) Tetris.INSTANCE.getCurrentScreen()).bigBlock.moveLeft();
 	}
 }

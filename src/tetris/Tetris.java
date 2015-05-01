@@ -17,7 +17,7 @@ import tetris.utils.MouseListener;
 public class Tetris extends Applet implements ActionListener {
 	public static final int WIDTH = 1000, HEIGHT = 750;
 	public static Tetris INSTANCE;
-	private static ScreenBase currentScreen;
+	private ScreenBase currentScreen;
 	private Graphics buffer;
 	private Image image;
 
@@ -67,5 +67,9 @@ public class Tetris extends Applet implements ActionListener {
 
 	public void click(int x, int y) {
 		currentScreen.click(x, y);
+	}
+
+	public ScreenBase getCurrentScreen() {
+		return currentScreen;
 	}
 }
