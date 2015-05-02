@@ -72,6 +72,8 @@ public class ScreenGame extends ScreenBase {
 	public void tick() {
 		if (gameOver)
 			return;
+		level = ((int)Math.floor(score / 30)) + 1;
+		lvlDelay = 40 - 2 * level;
 		delay--;
 		if (delay <= 0) {
 			delay = lvlDelay;
@@ -109,10 +111,6 @@ public class ScreenGame extends ScreenBase {
 		if (score > 0 && olcScore != score) {
 			Tetris.INSTANCE.repaint();
 			checkLines();
-		}
-		if (score >= (30 *2^level)) {
-			level++;
-			lvlDelay -=2;
 		}
 	}
 

@@ -1,8 +1,6 @@
 package tetris.utils;
 
-import tetris.blocks.BigBlock;
-import tetris.blocks.BigBlockA;
-import tetris.blocks.BigBlockB;
+import tetris.blocks.*;
 
 import java.util.Random;
 /**
@@ -12,11 +10,19 @@ public class Utils {
 	    private static final Random random = new Random();
 
 	public static BigBlock getRandomBlock(int x, int y) {
-		switch (random.nextInt(2)) {
+		switch (random.nextInt(6)) {
 			case 0:
 				return new BigBlockA(x, y);
-			default:
+			case 1:
 				return new BigBlockB(x, y);
+			case 2:
+				return new BigBlockC(x, y);
+			case 3:
+				return new BigBlockD(x, y);
+			case 4:
+				return new BigBlockE(x, y);
+			default:
+				return new BigBlockF(x, y);
 		}
 	}
 

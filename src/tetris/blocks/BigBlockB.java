@@ -50,6 +50,5 @@ public class BigBlockB extends BigBlock {
                 }
 		};
 		resetList();
-		addBlocks();
 	}
 }
