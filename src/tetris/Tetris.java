@@ -4,6 +4,7 @@ import tetris.screens.ScreenBase;
 import tetris.screens.ScreenMain;
 import tetris.utils.Images;
 import tetris.utils.MouseListener;
+import tetris.utils.Scores;
 
 import javax.swing.*;
 import java.applet.Applet;
@@ -17,6 +18,7 @@ import java.awt.event.ActionListener;
 public class Tetris extends Applet implements ActionListener {
     public static final int WIDTH = 1000, HEIGHT = 750;
     public static Tetris INSTANCE;
+	public static Scores SCORES;
     private ScreenBase currentScreen;
     private Graphics buffer;
     private Image image;
@@ -35,6 +37,7 @@ public class Tetris extends Applet implements ActionListener {
         INSTANCE = this;
         Images.loadImages();
         switchToScreen(new ScreenMain());
+		SCORES = new Scores();
         new Timer(20, this).start();
     }
 

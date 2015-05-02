@@ -17,7 +17,7 @@ import java.util.Random;
 public class Images {
     private static final Random random = new Random();
     public static Image[] blocks, buttons;
-    public static Image logo, downButton, leftButton, rightButton, rotateButton, background, board, gridOverlay, credits, settingsTitle, settingsButton;
+    public static Image logo, downButton, leftButton, rightButton, rotateButton, background, board, gridOverlay, credits, settingsTitle, settingsButton, level, score, nextBlock, gameOver, highScores;
 
     public static Image getRandomTexture() {
         return blocks[random.nextInt(blocks.length)];
@@ -41,6 +41,11 @@ public class Images {
         credits = loadImage("titleCredits.png");
         settingsTitle = loadImage("titleSettings.png");
         settingsButton = loadImage("buttonSettings.png");
+        level = loadImage("levelPreview.png");
+        score = loadImage("scorePreview.png");
+        nextBlock = loadImage("nextBlockPreview.png");
+		gameOver = loadImage("titleGameover.png");
+		highScores = loadImage("titleHighscores.png");
         System.out.println("Images loaded");
     }
 

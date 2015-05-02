@@ -1,8 +1,10 @@
 package tetris.utils;
 
-import java.awt.Graphics;
-
+import tetris.Tetris;
 import tetris.blocks.Block;
+import tetris.screens.ScreenGame;
+
+import java.awt.*;
 
 
 /**
@@ -12,6 +14,9 @@ public class BlockManager {
 	private Block blocks[][] = new Block[10][20];
 
 	public void setBlock(int x, int y, Block block) {
+		if (!isEmpty(x, y)) {
+			((ScreenGame) Tetris.INSTANCE.getCurrentScreen()).gameOver();
+		}
 		blocks[x][y] = block;
 	}
 

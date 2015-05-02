@@ -39,7 +39,16 @@ public class BigBlockA extends BigBlock {
 						new Location(0, 1),
 						new Location(0, 2),
 						new Location(0, 3)
-				}
+				},
+
+                //demo rotation
+                {
+                        new Location(0, 2),
+                        new Location(1, 2),
+                        new Location(2, 2),
+                        new Location(3, 2)
+                }
+
 		};
 		resetList();
 		addBlocks();
