@@ -1,7 +1,6 @@
 package tetris.blocks;
 
 import tetris.utils.Location;
-import tetris.utils.Utils;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -12,7 +11,7 @@ import tetris.utils.Utils;
 public class BigBlockB extends BigBlock {
 
 	public BigBlockB(int x, int y) {
-		super(x, y, Utils.getRandomColor());
+		super(x, y);
 		STATES = new Location[][]{
 				//rotation 0
 				{

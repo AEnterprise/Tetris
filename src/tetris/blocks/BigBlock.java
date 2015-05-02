@@ -1,12 +1,13 @@
 package tetris.blocks;
 
-import java.awt.Color;
+import tetris.screens.ScreenGame;
+import tetris.utils.Images;
+import tetris.utils.Location;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import tetris.screens.ScreenGame;
-import tetris.utils.Location;
 
 /**
  * Created by AEnterprise
@@ -14,14 +15,14 @@ import tetris.utils.Location;
 public abstract class BigBlock {
 	protected static Location[][] STATES;
 	public int x, y, rotation;
-	protected Color color;
 	protected List<Location> locations = new ArrayList<>();
+    private final Image TEXTURE;
 
-	public BigBlock(int x, int y, Color color) {
+	public BigBlock(int x, int y) {
 		this.x = x;
 		this.y = y;
 		rotation = 0;
-		this.color = color;
+        TEXTURE = Images.getRandomTexture();
 	}
 
 	public void moveDown() {
@@ -84,7 +85,7 @@ public abstract class BigBlock {
 
 	public void addBlocks() {
 		for (Location location : locations) {
-			ScreenGame.blockManager.setBlock(x + location.getX(), y + location.getY(), new Block(color));
+			ScreenGame.blockManager.setBlock(x + location.getX(), y + location.getY(), new Block(TEXTURE));
 		}
 	}
 

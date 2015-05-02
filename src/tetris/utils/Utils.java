@@ -1,11 +1,10 @@
 package tetris.utils;
 
-import java.awt.Color;
-import java.util.Random;
-
 import tetris.blocks.BigBlock;
 import tetris.blocks.BigBlockA;
 import tetris.blocks.BigBlockB;
+
+import java.util.Random;
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -14,22 +13,7 @@ import tetris.blocks.BigBlockB;
  * http://buildcraftadditions.wordpress.com/wiki/licensing-stuff/
  */
 public class Utils {
-	private static final Random random = new Random();
-	private static final Color[] COLORS = {
-			Color.BLACK,
-					Color.BLUE,
-					Color.CYAN,
-					Color.DARK_GRAY,
-					Color.GRAY,
-					Color.GREEN,
-					Color.LIGHT_GRAY,
-					Color.PINK,
-					Color.WHITE,
-					Color.YELLOW};
-
-	public static Color getRandomColor() {
-		return COLORS[random.nextInt(COLORS.length)];
-	}
+	    private static final Random random = new Random();
 
 	public static BigBlock getRandomBlock(int x, int y) {
 		switch (random.nextInt(2)) {
@@ -39,4 +23,6 @@ public class Utils {
 				return new BigBlockB(x, y);
 		}
 	}
+
+
 }

@@ -1,10 +1,11 @@
 package tetris.screens;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-
+import tetris.Tetris;
 import tetris.screens.widgets.WidgetMenuButton;
+import tetris.utils.Colors;
+import tetris.utils.Images;
+
+import java.awt.*;
 
 /**
  * Created by AEnterprise
@@ -13,19 +14,14 @@ public class ScreenMain extends ScreenBase {
 
 	@Override
 	public void init() {
-		widgets.add(new WidgetMenuButton(400, 180, 250, 30, "START", new ScreenGame(), this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
-		widgets.add(new WidgetMenuButton(400, 230, 250, 30, "CREDITS", new ScreenCredits(), this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
+		widgets.add(new WidgetMenuButton(400, 220, "START", Images.buttons[Colors.GREEN.ordinal()], Color.yellow, Color.red, new ScreenGame(), this));
+		widgets.add(new WidgetMenuButton(400, 300, "CREDITS", Images.buttons[Colors.BLUE.ordinal()], Color.yellow, Color.red, new ScreenCredits(), this));
 	}
 
 	@Override
 	public void renderForeground(Graphics g, int mouseX, int mouseY) {
 		super.renderForeground(g, mouseX, mouseY);
-		Font old = g.getFont();
-		g.setFont(new Font("", Font.BOLD, 30));
-		g.setColor(Color.ORANGE);
-		String title = "TETRIS";
-		g.drawChars(title.toCharArray(), 0, title.length(), 470, 60);
-		g.setFont(old);
+        g.drawImage(Images.logo, 100, 10, Tetris.INSTANCE);
 	}
 
 	@Override

@@ -1,40 +1,24 @@
 package tetris.screens.widgets;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
+import tetris.Tetris;
 import tetris.screens.ScreenBase;
+
+import java.awt.*;
 
 /**
  * Created by AEnterprise
  */
 public abstract class WidgetButton extends WidgetBase {
-	private String text;
-	private Color backgroundNormal, backgroundHover, textNormal, textHover;
+    private final Image background;
 
-	public WidgetButton(int x, int y, int width, int height, String text, ScreenBase screen) {
+	public WidgetButton(int x, int y, int width, int height, Image background, ScreenBase screen) {
 		super(x, y, width, height, screen);
-		this.text = text;
+        this.background = background;
 	}
 
 	@Override
 	public void render(Graphics g, int mouseX, int mouseY, boolean hover) {
-		g.setColor(hover ? backgroundHover : backgroundNormal);
-		g.fillRect(x, y, width, height);
-		g.setColor(hover ? textHover : textNormal);
-		g.drawChars(text.toCharArray(), 0, text.length(), (x + width / 2) - text.length() * 4, y + height / 2);
-	}
-
-	public WidgetButton setColors(Color backgroundNormal, Color backgroundHover, Color textNormal, Color textHover) {
-		this.backgroundNormal = backgroundNormal;
-		this.backgroundHover = backgroundHover;
-		this.textNormal = textNormal;
-		this.textHover = textHover;
-		return this;
-	}
-
-	public void setText(String text) {
-		this.text = text;
+		g.drawImage(background, x, y, Tetris.INSTANCE);
 	}
 
 	@Override

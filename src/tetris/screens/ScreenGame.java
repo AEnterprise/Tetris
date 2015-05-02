@@ -1,8 +1,5 @@
 package tetris.screens;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 import tetris.Tetris;
 import tetris.blocks.BigBlock;
 import tetris.screens.widgets.WidgetButtonLeft;
@@ -11,6 +8,8 @@ import tetris.screens.widgets.WidgetButtonRotate;
 import tetris.screens.widgets.WidgetDownButton;
 import tetris.utils.BlockManager;
 import tetris.utils.Utils;
+
+import java.awt.*;
 
 /**
  * Created by AEnterprise
@@ -26,10 +25,10 @@ public class ScreenGame extends ScreenBase {
 		level = 1;
 		blockManager = new BlockManager();
 		newBlock();
-		widgets.add(new WidgetDownButton(10, 180, 80, 30, "DOWN", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
-		widgets.add(new WidgetButtonLeft(10, 220, 80, 30, "LEFT", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
-		widgets.add(new WidgetButtonRight(10, 260, 80, 30, "RIGHT", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
-		widgets.add(new WidgetButtonRotate(10, 300, 80, 30, "ROTATE", this).setColors(Color.yellow, Color.red, Color.red, Color.yellow));
+		widgets.add(new WidgetDownButton(800, 600, this));
+		widgets.add(new WidgetButtonLeft(725, 600, this));
+		widgets.add(new WidgetButtonRight(875, 600, this));
+		widgets.add(new WidgetButtonRotate(800, 525, this));
 		lvlDelay = delay = 40;
 	}
 

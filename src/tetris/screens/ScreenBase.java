@@ -2,6 +2,7 @@ package tetris.screens;
 
 import tetris.Tetris;
 import tetris.screens.widgets.WidgetBase;
+import tetris.utils.Images;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  */
 public abstract class ScreenBase {
 	private Font awtFont = new Font("", Font.PLAIN, 18);
-	protected ArrayList<WidgetBase> widgets = new ArrayList<WidgetBase>();
+	protected ArrayList<WidgetBase> widgets = new ArrayList<>();
 
 
 	public abstract void init();
@@ -22,8 +23,7 @@ public abstract class ScreenBase {
 	}
 
 	protected void renderBackground(Graphics g, int mouseX, int mouseY) {
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(0, 0, Tetris.WIDTH, Tetris.HEIGHT);
+		g.drawImage(Images.background, 0, 0, Tetris.INSTANCE);
 	}
 
 	protected void renderForeground(Graphics g, int mouseX, int mouseY) {

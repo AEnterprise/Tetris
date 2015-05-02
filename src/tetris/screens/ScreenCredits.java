@@ -1,10 +1,12 @@
 package tetris.screens;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-
+import tetris.Tetris;
 import tetris.screens.widgets.WidgetMenuButton;
+import tetris.utils.Colors;
+import tetris.utils.Images;
+
+import java.awt.*;
+
 /**
  * Copyright (c) 2014-2015, AEnterprise
  * http://buildcraftadditions.wordpress.com/
@@ -16,7 +18,7 @@ public class ScreenCredits extends ScreenBase {
 
 	@Override
 	public void init() {
-		widgets.add(new WidgetMenuButton(200, 280, 400, 50, "BACK TO MAIN MENU", new ScreenMain(), this).setColors(Color.YELLOW, Color.RED, Color.RED, Color.YELLOW));
+		widgets.add(new WidgetMenuButton(200, 280, "BACK TO MAIN MENU", Images.buttons[Colors.PURPLE.ordinal()], Color.YELLOW, Color.RED, new ScreenMain(), this));
 	}
 
 	@Override
@@ -28,10 +30,7 @@ public class ScreenCredits extends ScreenBase {
 	protected void renderForeground(Graphics g, int mouseX, int mouseY) {
 		super.renderForeground(g, mouseX, mouseY);
 		Font old = g.getFont();
-		g.setFont(new Font("", Font.BOLD, 30));
-		g.setColor(Color.ORANGE);
-		String title = "CREDITS";
-		g.drawChars(title.toCharArray(), 0, title.length(), 470, 60);
+		g.drawImage(Images.credits, 100, 0, Tetris.INSTANCE);
 		g.setFont(new Font("", Font.BOLD, 20));
 		g.setColor(Color.RED);
 		String name = "Code: Tim De Keyser";

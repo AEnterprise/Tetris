@@ -1,7 +1,6 @@
 package tetris.blocks;
 
 import tetris.utils.Location;
-import tetris.utils.Utils;
 
 /**
  * Created by AEnterprise
@@ -9,7 +8,7 @@ import tetris.utils.Utils;
 public class BigBlockA extends BigBlock {
 
 	public BigBlockA(int x, int y) {
-		super(x, y, Utils.getRandomColor());
+		super(x, y);
 		STATES = new Location[][]{
 				//rotation 0
 				{
