@@ -3,10 +3,7 @@ package tetris.screens;
 import tetris.Tetris;
 import tetris.blocks.BigBlock;
 import tetris.blocks.Block;
-import tetris.screens.widgets.WidgetButtonLeft;
-import tetris.screens.widgets.WidgetButtonRight;
-import tetris.screens.widgets.WidgetButtonRotate;
-import tetris.screens.widgets.WidgetDownButton;
+import tetris.screens.widgets.*;
 import tetris.utils.*;
 
 import java.awt.*;
@@ -19,6 +16,7 @@ public class ScreenGame extends ScreenBase {
 	public BigBlock bigBlock, nextBlock;
 	private int score, level, delay, lvlDelay;
 	private boolean gameOver = false;
+	private WidgetButton menu = new WidgetMenuButton(380, 600, "BACK TO MAIN MENU", Images.buttons[Colors.RED.ordinal()], Color.BLACK, Color.WHITE, new ScreenMain(), this).dissable();
 
 	@Override
 	public void init() {
@@ -43,6 +41,7 @@ public class ScreenGame extends ScreenBase {
 	@Override
 	protected void renderForeground(Graphics g, int mouseX, int mouseY) {
 		super.renderForeground(g, mouseX, mouseY);
+		Font old = g.getFont();
 		g.setColor(Color.CYAN);
 		g.setFont(new Font("", Font.BOLD, 38));
 		g.drawImage(Images.level, 10, 100, Tetris.INSTANCE);
@@ -51,6 +50,7 @@ public class ScreenGame extends ScreenBase {
 		g.drawChars(lvl.toCharArray(), 0, lvl.length(), 180, 155);
 		String s = String.valueOf(score);
 		g.drawChars(s.toCharArray(), 0, s.length(), 180, 255);
+		g.setFont(old);
 
 		blockManager.renderBlocks(g);
 
@@ -63,13 +63,15 @@ public class ScreenGame extends ScreenBase {
 			g.setColor(color);
 			g.fillRect(0, 0, Tetris.WIDTH, Tetris.HEIGHT);
 			g.drawImage(Images.gameOver, 100, 300, Tetris.INSTANCE);
+			menu.render(g, mouseX, mouseY, menu.mouseOver(mouseX, mouseY));
+
 		}
 	}
 
 	@Override
 	public void tick() {
 		if (gameOver)
-			Tetris.INSTANCE.switchToScreen(new ScreenMain());
+			return;
 		delay--;
 		if (delay <= 0) {
 			delay = lvlDelay;
@@ -117,5 +119,7 @@ public class ScreenGame extends ScreenBase {
 	public void gameOver() {
 		gameOver = true;
 		Tetris.SCORES.addScore(new HighScore(score, level));
+		widgets.add(menu);
+		menu.enable();
 	}
 }

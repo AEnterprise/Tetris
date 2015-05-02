@@ -10,6 +10,7 @@ import java.awt.*;
  */
 public abstract class WidgetButton extends WidgetBase {
     private final Image background;
+	protected boolean enabled = true;
 
 	public WidgetButton(int x, int y, int width, int height, Image background, ScreenBase screen) {
 		super(x, y, width, height, screen);
@@ -23,4 +24,14 @@ public abstract class WidgetButton extends WidgetBase {
 
 	@Override
 	public abstract void clicked();
+
+	public WidgetButton dissable() {
+		enabled = false;
+		return this;
+	}
+
+	public WidgetButton enable() {
+		enabled = true;
+		return this;
+	}
 }
