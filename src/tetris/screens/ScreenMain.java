@@ -14,8 +14,9 @@ public class ScreenMain extends ScreenBase {
 
 	@Override
 	public void init() {
-		widgets.add(new WidgetMenuButton(400, 220, "START", Images.buttons[Colors.GREEN.ordinal()], Color.yellow, Color.red, new ScreenGame(), this));
-		widgets.add(new WidgetMenuButton(400, 300, "CREDITS", Images.buttons[Colors.BLUE.ordinal()], Color.yellow, Color.red, new ScreenCredits(), this));
+		widgets.add(new WidgetMenuButton(400, 220, "START", Images.buttons[Colors.CYAN.ordinal()], Color.yellow, Color.CYAN, new ScreenGame(), this));
+		widgets.add(new WidgetMenuButton(400, 300, "OPTIONS", Images.buttons[Colors.BROWN.ordinal()], Color.yellow, Color.CYAN, new ScreenOptions(), this));
+		widgets.add(new WidgetMenuButton(400, 480, "CREDITS", Images.buttons[Colors.BLUE.ordinal()], Color.yellow, Color.CYAN, new ScreenCredits(), this));
 	}
 
 	@Override

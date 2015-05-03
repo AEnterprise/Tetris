@@ -14,7 +14,7 @@ public class ScreenCredits extends ScreenBase {
 
 	@Override
 	public void init() {
-		widgets.add(new WidgetMenuButton(200, 280, "BACK TO MAIN MENU", Images.buttons[Colors.PURPLE.ordinal()], Color.YELLOW, Color.RED, new ScreenMain(), this));
+		widgets.add(new WidgetMenuButton(200, 280, "BACK TO MAIN MENU", Images.buttons[Colors.PURPLE.ordinal()], Color.YELLOW, Color.BLUE, new ScreenMain(), this));
 	}
 
 	@Override

@@ -53,7 +53,7 @@ public class BigBlock {
 		rotateRight();
 		resetList();
 		for (Location location : locations) {
-			if (!ScreenGame.blockManager.isEmpty(x + location.getX(), y + location.getY())) {
+			if (x + location.getX() < 10 && y + location.getY() < 20 && !ScreenGame.blockManager.isEmpty(x + location.getX(), y + location.getY())) {
 				rotateLeft();
 				resetList();
 			}

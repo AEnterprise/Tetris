@@ -36,6 +36,8 @@ public class ScreenGame extends ScreenBase {
 		super.renderBackground(g, mouseX, mouseY);
 		g.drawImage(Images.board, 290, 90, Tetris.INSTANCE);
 		g.drawImage(Images.nextBlock, 645, 110, Tetris.INSTANCE);
+		if (Tetris.INSTANCE.OPTIONS.showGrid)
+			g.drawImage(Images.gridOverlay, 290, 90, Tetris.INSTANCE);
 	}
 
 	@Override
@@ -52,6 +54,8 @@ public class ScreenGame extends ScreenBase {
 		g.drawChars(s.toCharArray(), 0, s.length(), 180, 255);
 		g.setFont(old);
 
+
+
 		blockManager.renderBlocks(g);
 
 		for (Location location: nextBlock.getLocations()) {
@@ -61,7 +65,7 @@ public class ScreenGame extends ScreenBase {
 		if (gameOver) {
 			Color color = new Color(0, 0, 0, .6f);
 			g.setColor(color);
-			g.fillRect(0, 0, Tetris.WIDTH, Tetris.HEIGHT);
+			g.fillRect(0, 0, Tetris.INSTANCE.WIDTH, Tetris.INSTANCE.HEIGHT);
 			g.drawImage(Images.gameOver, 100, 300, Tetris.INSTANCE);
 			menu.render(g, mouseX, mouseY, menu.mouseOver(mouseX, mouseY));
 
@@ -116,7 +120,6 @@ public class ScreenGame extends ScreenBase {
 
 	public void gameOver() {
 		gameOver = true;
-		Tetris.SCORES.addScore(new HighScore(score, level));
 		widgets.add(menu);
 		menu.enable();
 	}
