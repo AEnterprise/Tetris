@@ -1,10 +1,8 @@
 package tetris.utils;
 
-import tetris.Tetris;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
+import java.io.InputStream;
 import java.util.Random;
 
 /**
@@ -29,7 +27,7 @@ public class Images {
         logo = loadImage("logo.png");
         downButton = loadImage("arrowDown.png");
         leftButton = loadImage("arrowLeft.png");
-        rightButton = loadImage("ArrowRight.png");
+        rightButton = loadImage("arrowRight.png");
         rotateButton = loadImage("arrowRotate.png");
         background = loadImage("background1000x750.png");
         board = loadImage("boardVersionC.png");
@@ -46,12 +44,12 @@ public class Images {
     }
 
     public static Image loadImage(String name) {
-        try {
-            ClassLoader loader = Tetris.class.getClassLoader();
-            return ImageIO.read(new File(loader.getResource(name).getPath()));
-        } catch (Throwable e) {
-            System.out.println("Failed to load image: " + name);
-        }
-        return null;
+		try {
+			InputStream stream = Images.class.getResourceAsStream("/" + name);
+			return ImageIO.read(stream);
+		} catch (Throwable e) {
+			System.out.println("Failed to load image: " + name);
+		}
+		return null;
     }
 }
