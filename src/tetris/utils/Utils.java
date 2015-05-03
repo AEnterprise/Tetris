@@ -3,6 +3,7 @@ package tetris.utils;
 import tetris.blocks.*;
 
 import java.util.Random;
+
 /**
  * Created by AEnterprise
  */

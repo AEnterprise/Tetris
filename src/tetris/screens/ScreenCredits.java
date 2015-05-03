@@ -26,7 +26,7 @@ public class ScreenCredits extends ScreenBase {
 	protected void renderForeground(Graphics g, int mouseX, int mouseY) {
 		super.renderForeground(g, mouseX, mouseY);
 		Font old = g.getFont();
-		g.drawImage(Images.credits, 100, 0, Tetris.INSTANCE);
+		g.drawImage(Images.credits, 100, 20, Tetris.INSTANCE);
 		g.setFont(new Font("", Font.BOLD, 20));
 		g.setColor(Color.RED);
 		String name = "Code: Tim De Keyser";

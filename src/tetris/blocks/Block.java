@@ -1,9 +1,8 @@
 package tetris.blocks;
 
-import java.awt.Graphics;
-import java.awt.Image;
-
 import tetris.Tetris;
+
+import java.awt.*;
 
 /**
  * Created by AEnterprise

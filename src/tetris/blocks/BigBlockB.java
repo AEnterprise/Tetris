@@ -1,6 +1,7 @@
 package tetris.blocks;
 
 import tetris.utils.Location;
+
 /**
  * Created by AEnterprise
  */

@@ -44,12 +44,12 @@ public class Images {
     }
 
     public static Image loadImage(String name) {
-		try {
+        try {
 			InputStream stream = Images.class.getResourceAsStream("/" + name);
-			return ImageIO.read(stream);
-		} catch (Throwable e) {
-			System.out.println("Failed to load image: " + name);
-		}
-		return null;
+            return ImageIO.read(stream);
+        } catch (Throwable e) {
+            System.out.println("Failed to load image: " + name);
+        }
+        return null;
     }
 }

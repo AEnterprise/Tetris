@@ -22,7 +22,7 @@ public class ScreenMain extends ScreenBase {
 	@Override
 	public void renderForeground(Graphics g, int mouseX, int mouseY) {
 		super.renderForeground(g, mouseX, mouseY);
-        g.drawImage(Images.logo, 100, 10, Tetris.INSTANCE);
+        g.drawImage(Images.logo, 100, 25, Tetris.INSTANCE);
 	}
 
 	@Override

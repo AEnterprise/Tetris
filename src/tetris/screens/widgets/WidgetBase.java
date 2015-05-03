@@ -1,9 +1,8 @@
 package tetris.screens.widgets;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
-
 import tetris.screens.ScreenBase;
+
+import java.awt.*;
 
 /**
  * Created by AEnterprise
