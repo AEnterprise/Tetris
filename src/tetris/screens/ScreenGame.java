@@ -76,8 +76,8 @@ public class ScreenGame extends ScreenBase {
 	public void tick() {
 		if (gameOver)
 			return;
-		level = Math.max ((int)Math.floor(score / 30) + 1, 2);
-		lvlDelay = 40 - 3 * level;
+		level = ((int)Math.floor(score / 30)) + 1;
+		lvlDelay = Math.max(40 - 3 * level, 3);
 		delay--;
 		if (delay <= 0) {
 			delay = lvlDelay;
