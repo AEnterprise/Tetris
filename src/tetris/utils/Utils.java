@@ -11,7 +11,7 @@ public class Utils {
 	    private static final Random random = new Random();
 
 	public static BigBlock getRandomBlock(int x, int y) {
-		switch (random.nextInt(6)) {
+		switch (random.nextInt(7)) {
 			case 0:
 				return new BigBlockA(x, y);
 			case 1:
@@ -22,8 +22,10 @@ public class Utils {
 				return new BigBlockD(x, y);
 			case 4:
 				return new BigBlockE(x, y);
-			default:
+			case 5:
 				return new BigBlockF(x, y);
+			default:
+				return new BigBlockG(x, y);
 		}
 	}
 
