@@ -76,8 +76,8 @@ public class ScreenGame extends ScreenBase {
 	public void tick() {
 		if (gameOver)
 			return;
-		level = ((int)Math.floor(score / 30)) + 1;
-		lvlDelay = 40 - 2 * level;
+		level = Math.max ((int)Math.floor(score / 30) + 1, 2);
+		lvlDelay = 40 - 3 * level;
 		delay--;
 		if (delay <= 0) {
 			delay = lvlDelay;
@@ -109,7 +109,7 @@ public class ScreenGame extends ScreenBase {
 			}
 			if (full) {
 				blockManager.removeLine(y);
-				score += 10;
+				score += 15;
 			}
 		}
 		if (score > 0 && olcScore != score) {
