@@ -91,11 +91,11 @@ public class ScreenGame extends ScreenBase {
 	private void newBlock() {
 		checkLines();
 		if (nextBlock == null)
-			nextBlock = Utils.getRandomBlock(0, 0);
+			nextBlock = Utils.getRandomBlock(3, 0);
 		bigBlock = nextBlock;
 		bigBlock.start();
 		bigBlock.addBlocks();
-		nextBlock = Utils.getRandomBlock(0, 0);
+		nextBlock = Utils.getRandomBlock(3, 0);
 	}
 
 	private void checkLines() {
